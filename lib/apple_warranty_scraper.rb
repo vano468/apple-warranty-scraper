@@ -41,7 +41,3 @@ private
     }
   end
 end
-
-warranty = AppleWarrantyScraper.new('013977000323877')
-puts warranty.warranty
-puts warranty.expiration
