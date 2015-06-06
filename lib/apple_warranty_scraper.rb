@@ -2,6 +2,8 @@ require 'date'
 require 'rest-client'
 
 class AppleWarrantyScraper
+  class NoInformationAboutSerial < Exception ; end
+
   URL = 'https://selfsolve.apple.com/wcResults.do'
 
   attr_accessor :serial, :warranty, :expiration
@@ -22,6 +24,7 @@ private
   end
 
   def get_warranty
+    raise NoInformationAboutSerial unless get_response
     if get_response[/'Repairs and Service Coverage:.*?'/].include? 'Expired'
       :expired
     else

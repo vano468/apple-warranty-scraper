@@ -22,4 +22,12 @@ RSpec.describe AppleWarrantyScraper do
       expect(active.expiration).to eq Date.parse('2016-08-10')
     end
   end
+
+  describe 'pass incorrect serial' do
+    it 'should throw exception' do
+      expect {
+        AppleWarrantyScraper.new 'xxxxxxxxxxxxxxx'
+      }.to raise_error(AppleWarrantyScraper::NoInformationAboutSerial)
+    end
+  end
 end
